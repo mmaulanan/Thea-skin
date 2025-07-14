@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Celeste</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,300;0,400;0,700;1,700&display=swap" rel="stylesheet">
+    <!-- Feather Icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <!-- My Style -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Alpine JS -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <!-- App -->
+    <script src="app.js"></script>
+
+</head>
+<body>
+    
+
+    <!-- Navbar Start -->
+
+    <nav class="navbar" x-data>
+        <a href="#" class="navbar-logo">Théa <span>Skin</span></a>
+
+
+        <div class="navbar-nav">
+            <a href="#home">Home</a>
+            <a href="#about">Tentang Kami</a>
+            <a href="#catalog">Katalog</a>
+            <a href="#products">Produk</a>
+            <a href="#contact">Kontak</a>
+        </div>
+
+        <div class="navbar-extra">
+            <a href="#" id="search-button"><i data-feather="search"></i></a>
+            <a href="#" id="shopping-cart-button">
+                <i data-feather="shopping-cart"></i>
+                <span class="quantity-badge" x-show="$store.cart.quantity" x-text="$store.cart.quantity"></span>
+            </a>
+            <a href="#" id="hamburger-menu"><i data-feather="menu"></i></a>
+        </div>
+
+        <!-- Search Form Start -->
+        <div class="search-form">
+            <input type="search" id="search-box" placeholder="search here...">
+            <label for="search-box"><i data-feather="search"></i></label>
+        </div>
+        <!-- Search Form End -->
+
+
+        <!-- Shopping Cart Start -->
+
+        <div class="shopping-cart">
+            <template x-for="(item, index) in $store.cart.items" x-keys="index">
+                <div class="cart-item">
+                    <img :src="`img/barang/${item.img}`" :alt="item.name">
+                    <div class="item-detail">
+                        <h3 x-text="item.name"></h3>
+                        <div class="item-price">
+                            <span x-text="rupiah(item.price)"></span> &times;
+                            <button id="remove" @click="$store.cart.remove(item.id)">&minus;</button>
+                            <span x-text="item.quantity"></span>
+                            <button id="add" @click="$store.cart.add(item)">&plus;</button> &equals;
+                            <span x-text="rupiah(item.total)"></span>
+                        </div>
+                    </div>
+                </div>
+            </template>
+            <h4 x-show="!$store.cart.items.length" style="margin-top: 1rem;" class="hapus">Keranjang masih kosong</h4>
+            <h4 x-show="$store.cart.items.length">Total: <span x-text="rupiah($store.cart.total)"></span></h4>
+        </div>
+
+        <!-- Shopping Cart End -->
+
+
+    </nav>
+
+    <!-- Navbar End -->
+
+
+
+    <!-- Hero Section Start-->
+     <section class="hero" id="home">
+        <main class="content">
+            <h1>Get your <span>shade</span></h1>
+            <p>Available on 35 shades</p>
+            <!-- <a href="#" class="cta">Find Now</a> -->
+        </main>
+     </section>
+
+    <!-- Hero Section End-->
+
+
+
+    <!-- About Section Start -->
+
+     <sectio id="about" class="about">
+        <h2><span>Tentang</span> Kami</h2>
+
+
+        <div class="row">
+            <div class="about-img">
+                <img src="img/tentang-kami2.jpg" alt="Tentang Kami">
+            </div>
+            <div class="content">
+                <h3>Kenapa memilih produk kami?</h3>
+                <p>Théa Skin adalah brand perawatan diri yang menggabungkan inovasi modern dengan bahan-bahan alami untuk mendukung penampilan dan kesehatan kulit setiap individu. Kami percaya bahwa merawat diri adalah hak semua orang—tanpa batasan usia, gender, atau latar belakang.
+
+Dengan komitmen pada kualitas dan keamanan, setiap produk kami dirancang secara cermat dan telah melewati uji dermatologis. Kami menyediakan berbagai pilihan produk seperti skincare, bodycare, haircare, hingga parfum, yang disesuaikan dengan kebutuhan beragam jenis kulit dan gaya hidup.</p>
+                <p>Kami memahami bahwa setiap orang memiliki kebutuhan perawatan yang berbeda. Itulah sebabnya kami menawarkan solusi yang personal, efektif, dan dapat diandalkan—agar semua orang bisa merasa nyaman, percaya diri, dan tampil versi terbaik dari dirinya sendiri.</p>
+            </div>
+        </div>
+     </sectio>
+
+    <!-- About Section End -->
+
+
+
+    <!-- Katalog Section Start -->
+     <section id="catalog" class="catalog">
+         <h2><span>Katalog</span> Kami</h2>
+         <p>Kami menyediakan berbagai pilihan produk Théa Skin yang dirancang untuk memenuhi kebutuhan perawatan diri Anda sehari-hari.
+
+</p>
+
+         <div class="row">
+            <div class="catalog-card">
+                <img src="img/produk/1.jpg" alt="Skincare" class="catalog-card-img">
+                <h3 class="catalog-card-title">Skincare</h3>
+                <p class="catalog-card-price">IDR 1.500.000</p>
+            </div>
+            <div class="catalog-card">
+                <img src="img/produk/2.jpg" alt="Bodycare" class="catalog-card-img">
+                <h3 class="catalog-card-title">Bodycare</h3>
+                <p class="catalog-card-price">IDR 550.000</p>
+            </div>
+            <div class="catalog-card">
+                <img src="img/produk/3.jpg" alt="Haircare" class="catalog-card-img">
+                <h3 class="catalog-card-title">Haircare</h3>
+                <p class="catalog-card-price">IDR 450.000</p>
+            </div>
+            <div class="catalog-card">
+                <img src="img/produk/4.jpg" alt="Makeup" class="catalog-card-img">
+                <h3 class="catalog-card-title">Makeup</h3>
+                <p class="catalog-card-price">IDR 2.000.000</p>
+            </div>
+            <div class="catalog-card">
+                <img src="img/produk/4.jpg" alt="Parfume" class="catalog-card-img">
+                <h3 class="catalog-card-title">Parfume</h3>
+                <p class="catalog-card-price">IDR 2.000.000</p>
+            </div>
+         </div>
+     </section>
+    <!-- Katalog Section End -->
+
+
+
+    <!-- Product Section Strat -->
+    <section class="products" id="products" x-data="products">
+        <h2><span>Produk</span> Kami</h2>
+        <p>Produk kami diformulasikan dengan bahan berkualitas tinggi, aman digunakan, dan sesuai untuk berbagai jenis kulit.</p>
+
+        <div class="row">
+            <template x-for="(item, index) in items" x-key="index">
+                <div class="product-card">
+                <div class="product-icons">
+                    <a href="#" @click.prevent="$store.cart.add(item)">
+                        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="img/feather-sprite.svg#shopping-cart" /></svg>
+                    </a>
+                    <a href="#" class="item-detail-button">
+                        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="img/feather-sprite.svg#more-horizontal" /></svg>
+                    </a>
+                </div>
+                <div class="product-image">
+                    <img :src="`img/barang/${item.img}`" :alt="item.name">
+                </div>
+                <div class="product-content">
+                    <h3 x-text="item.name"></h3>
+                    <div class="product-stars">
+                        <svg width="24" height="24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="img/feather-sprite.svg#star" /></svg>
+                        <svg width="24" height="24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="img/feather-sprite.svg#star" /></svg>
+                        <svg width="24" height="24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="img/feather-sprite.svg#star" /></svg>
+                        <svg width="24" height="24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="img/feather-sprite.svg#star" /></svg>
+                        <svg width="24" height="24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="img/feather-sprite.svg#star" /></svg>
+                    </div>
+                    <div class="product-price"><span x-text="rupiah(item.price)"></span></div>
+                </div>
+                </div>
+            </template>
+        </div>
+    </section>
+    <!-- Product Section End -->
+
+
+
+    <!-- Contact Section Start -->
+
+     <section id="contact" class="contact">
+        <h2><span>Kontak</span> Kami</h2>
+        <p>Silakan hubungi kami apabila Anda memiliki pertanyaan, membutuhkan informasi lebih lanjut, atau memerlukan bantuan. Kami siap melayani Anda dengan sepenuh hati.</p>
+
+        <div class="row">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3961.014012624161!2d107.59354087363036!3d-6.888924393110112!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68e6603f5b8f93%3A0x65b023128ec2b79a!2sParis%20Van%20Java%2C%20Jl.%20Sukajadi%20No.131-139%2C%20Cipedes%2C%20Kec.%20Sukajadi%2C%20Kota%20Bandung%2C%20Jawa%20Barat%2040162!5e0!3m2!1sid!2sid!4v1752044113703!5m2!1sid!2sid" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="map"></iframe>
+
+            <form action="">
+                <div class="input-group">
+                    <i data-feather="user"></i>
+                    <input type="text" placeholder="Name">
+                </div>
+
+                <div class="input-group">
+                    <i data-feather="mail"></i>
+                    <input type="text" placeholder="Email">
+                </div>
+
+                <div class="input-group">
+                    <i data-feather="phone"></i>
+                    <input type="text" placeholder="Phone number">
+                </div>
+                <button type="submit" class="btn">Kirim Pesan</button>
+            </form>
+
+
+        </div>
+
+     </section>
+    <!-- Contact Section End -->
+
+    <!-- Footer Start -->
+    <footer>
+        <div class="socials">
+            <a href="#"><i data-feather="instagram"></i></a>
+            <a href="#"><i data-feather="twitter"></i></a>
+            <a href="#"><i data-feather="facebook"></i></a>
+        </div>
+
+        <div class="links">
+            <a href="#home">Home</a>
+            <a href="#about">Tentang Kami</a>
+            <a href="#catalog">Katalog</a>
+            <a href="#products">Produk</a>
+            <a href="#contact">Kontak</a>
+        </div>
+
+        <div class="credit">
+            <p>Created by <a href="">IF-9 Zorin</a> | &copy; 2025</p>
+        </div>
+    </footer>
+    <!-- Footer End -->
+
+
+    <!-- Modal Box Item Detail Start -->
+    <div class="modal" id="item-detail-modal">
+        <div class="modal-container">
+            <a href="#" class="close-icon"><i data-feather="x"></i></a>
+            <div class="modal-content">
+                <img src="img/barang/resizecom_br1.jpg" alt="Product 1">
+                <div class="product-content">
+                    <h3>Aging Advance Repair Serum</h3>
+                    <p>Mengurangi garis halus, mencerahkan kulit kusam, dan menutrisi secara mendalam untuk tampilan lebih muda dan segar.</p>
+                    <div class="product-stars">
+                        <i data-feather="star" class="star-full"></i>
+                        <i data-feather="star" class="star-full"></i>
+                        <i data-feather="star" class="star-full"></i>
+                        <i data-feather="star" class="star-full"></i>
+                        <i data-feather="star" class="star-full"></i>
+                    </div>
+                    <div class="product-price">IDR 1.050.000</div>
+                    <a href="#"><i data-feather="shopping-cart"></i> <span>Add to cart</span></a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- Modal Box Item Detail End -->
+    
+
+    <!-- Feather Icons -->
+    <script>
+      feather.replace();
+    </script>
+
+    <!-- My Java Script -->
+     <script src="script.js"></script>
+
+</body>
+</html>
